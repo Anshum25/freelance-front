@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
-import moment from "moment";
 import { Footer } from "@/components/layout/Footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -332,9 +331,11 @@ export default function Chat() {
 
   const clearAttachment = () => setAttachment(null);
 
+  import { format, formatDistanceToNow } from "date-fns";
+
   const formatTimestamp = (timestamp: string) => {
     if (!timestamp) return "";
-    return moment(timestamp).format('h:mm A');
+    return format(new Date(timestamp), 'h:mm a');
   };
 
   const getStatusIcon = (status: string) => {
@@ -548,7 +549,7 @@ export default function Chat() {
                 <div ref={messagesContainerRef} className="flex-1 min-h-0 overflow-y-auto px-6 space-y-4">
                   {messages.map((message, index) => {
                     const isSender = message.sender === userId;
-                    const timeString = message.timestamp ? moment(message.timestamp).format('h:mm A') : '';
+                    const timeString = message.timestamp ? format(new Date(message.timestamp), 'h:mm a') : '';
                     return (
                       <div
                         key={message._id || index}
