@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
+import { format, formatDistanceToNow } from "date-fns";
 import { Footer } from "@/components/layout/Footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -330,8 +331,6 @@ export default function Chat() {
   };
 
   const clearAttachment = () => setAttachment(null);
-
-  import { format, formatDistanceToNow } from "date-fns";
 
   const formatTimestamp = (timestamp: string) => {
     if (!timestamp) return "";
